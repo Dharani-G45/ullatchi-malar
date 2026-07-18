@@ -15,10 +15,11 @@ const HomePage = () => {
     const fetchNews = async () => {
       try {
         setLoading(true)
-        let url = 'http://localhost:5000/api/news'
+        const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+        let url = `${API_BASE_URL}/api/news`
         
         if (activeCategory !== 'all') {
-          url = `http://localhost:5000/api/news/category/${activeCategory}`
+          url = `${API_BASE_URL}/api/news/category/${activeCategory}`
         }
         
         const response = await axios.get(url)
