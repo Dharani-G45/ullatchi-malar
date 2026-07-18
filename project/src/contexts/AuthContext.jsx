@@ -2,6 +2,8 @@ import { createContext, useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+
 const AuthContext = createContext()
 
 export const useAuth = () => useContext(AuthContext)
@@ -38,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setError(null)
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
         password
       })
@@ -57,7 +59,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     try {
       setError(null)
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
         name,
         email,
         password
