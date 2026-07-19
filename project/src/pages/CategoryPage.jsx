@@ -14,7 +14,8 @@ const CategoryPage = () => {
     const fetchNewsByCategory = async () => {
       try {
         setLoading(true)
-        const response = await axios.get(`http://localhost:5000/api/news/category/${category}`)
+        const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+        const response = await axios.get(`${API_BASE_URL}/api/news/category/${category}`)
         setNews(response.data)
       } catch (err) {
         setError('Failed to fetch news articles')
