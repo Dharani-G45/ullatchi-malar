@@ -26,6 +26,23 @@ router.get('/', async (req, res) => {
   }
 })
 
+// --- MOVED TO TOP: Static route must come before dynamic /:id route ---
+// @route   GET /api/news/user
+// @desc    Get news articles by logged in user
+// @access  Private
+router.get('/user', protect, async (req, res) => {
+  try {
+    const news = await News.find({ author: req.user._id })
+      .sort({ createdAt: -1 })
+      .populate('author', 'name')
+    
+    res.json(news)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
 // @route   GET /api/news/:id
 // @desc    Get news article by ID
 // @access  Public
@@ -96,21 +113,6 @@ router.get('/search/:query', async (req, res) => {
     res.status(500).json({ message: 'Server error' })
   }
 })
-
-
-router.get('/user', protect, async (req, res) => {
-  try {
-    const news = await News.find({ author: req.user._id })
-      .sort({ createdAt: -1 })
-      .populate('author', 'name')
-    
-    res.json(news)
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: 'Server error' })
-  }
-})
-
 
 router.post('/', protect, async (req, res) => {
   try {
