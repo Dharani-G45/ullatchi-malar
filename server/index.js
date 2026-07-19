@@ -20,9 +20,15 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/NewsSite")
-  .then(() => console.log('Connected to MongoDB'))
+const mongoURI = process.env.MONGO_URI || process.env.MONGO_URL || process.env.DATABASE_URL || "mongodb://localhost:27017/NewsSite";
+
+mongoose.connect(mongoURI)
+  .then(() => console.log('Connected to MongoDB successfully.'))
   .catch(err => console.error('MongoDB connection error:', err))
+
+// mongoose.connect("mongodb://localhost:27017/NewsSite")
+//   .then(() => console.log('Connected to MongoDB'))
+//   .catch(err => console.error('MongoDB connection error:', err))
 
 // Routes
 app.use('/api/auth', authRoutes)
