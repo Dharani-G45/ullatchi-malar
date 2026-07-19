@@ -18,7 +18,8 @@ const NewsDetailPage = () => {
     const fetchNewsDetail = async () => {
       try {
         setLoading(true)
-        const response = await axios.get(`http://localhost:5000/api/news/${id}`)
+        const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+        const response = await axios.get(`${API_BASE_URL}/api/news/${id}`)
         setNews(response.data)
       } catch (err) {
         setError('Failed to fetch news details')
@@ -38,7 +39,8 @@ const NewsDetailPage = () => {
 
     try {
       setDeleteLoading(true)
-      await axios.delete(`http://localhost:5000/api/news/${id}`)
+      const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+      await axios.delete(`${API_BASE_URL}/api/news/${id}`)
       navigate('/')
     } catch (err) {
       setError('Failed to delete news article')
