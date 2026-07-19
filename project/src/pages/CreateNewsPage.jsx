@@ -7,7 +7,7 @@ const CreateNewsPage = () => {
 
   const handleCreateNews = async (formData) => {
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+      const API_BASE_URL = import.meta.env.VITE_API_URL || "hhttps://ullatchi-malar-74kn.onrender.com";
       await axios.post(`${API_BASE_URL}/api/news`, formData)
       return true
     } catch (err) {
