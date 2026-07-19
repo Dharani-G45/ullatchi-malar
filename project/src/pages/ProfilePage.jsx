@@ -15,7 +15,7 @@ const ProfilePage = () => {
     const fetchUserNews = async () => {
       try {
         setLoading(true)
-        const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+        const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar-74kn.onrender.com";
         const response = await axios.get(`${API_BASE_URL}/api/news/user`)
         setUserNews(response.data)
       } catch (err) {
