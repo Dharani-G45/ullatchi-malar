@@ -11,11 +11,13 @@ const EditNewsPage = () => {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "https://ullatchi-malar.onrender.com";
+
   useEffect(() => {
     const fetchNews = async () => {
       try {
         setLoading(true)
-        const response = await axios.get(`http://localhost:5000/api/news/${id}`)
+        const response = await axios.get(`${API_BASE_URL}/api/news/${id}`)
         setNews(response.data)
       } catch (err) {
         setError('Failed to fetch news article')
@@ -30,7 +32,7 @@ const EditNewsPage = () => {
 
   const handleUpdateNews = async (formData) => {
     try {
-      await axios.put(`http://localhost:5000/api/news/${id}`, formData)
+      await axios.put(`${API_BASE_URL}/api/news/${id}`, formData)
       return true
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to update news article')
